@@ -1,0 +1,8 @@
+# Use LF for all text files
+* text=auto
+
+# Explicitly specify line endings for specific file types
+*.c   text eol=lf
+*.h   text eol=lf
+*.swift text eol=lf
+*.cmake text eol=lf
