@@ -1,0 +1,39 @@
+name: attendance_nmscst
+description: "Flutter Web for Admin"
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.5.3
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # HIGH PRIO
+  intl: ^0.19.0
+  flutter_dotenv: ^5.1.0
+
+  # STATE MANAGEMENT
+  provider: ^6.1.2
+
+  # FIREBASE
+  firebase_core: ^3.6.0
+  firebase_database: ^11.1.4
+
+  # NETWORK
+  http: ^1.2.2
+  web_socket_channel: ^3.0.1
+
+  # STORAGE
+  shared_preferences: ^2.3.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+  - assets/
