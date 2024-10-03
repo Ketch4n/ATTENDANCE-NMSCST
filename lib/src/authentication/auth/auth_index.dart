@@ -22,8 +22,16 @@ class _AuthIndexState extends State<AuthIndex> {
   Future<void> checkUserSession() async {
     final prefs = await SharedPreferences.getInstance();
     final userId = prefs.getInt('userID');
+    final uname = prefs.getString('userNAME');
+    final uemail = prefs.getString('userEMAIL');
+    final urole = prefs.getInt('userROLE');
+
     setState(() {
       UserSessionEvent.quack = userId == null;
+      UserSessionEvent.id = userId!;
+      UserSessionEvent.email = uemail!;
+      UserSessionEvent.name = uname!;
+      UserSessionEvent.role = urole!;
     });
   }
 

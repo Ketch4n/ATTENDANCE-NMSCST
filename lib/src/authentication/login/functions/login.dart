@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:attendance_nmscst/src/components/snackbar.dart';
+import 'package:attendance_nmscst/src/data/provider/user_session.dart';
 import 'package:attendance_nmscst/src/data/server/url.dart';
 import 'package:attendance_nmscst/src/pages/index/index_page.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,14 @@ void login(context, email, password) async {
 
     if (response.statusCode == 200 && quack) {
       await prefs.setInt('userID', user['id']);
+      await prefs.setString('userNAME', user['name']);
+      await prefs.setString('userEMAIL', user['email']);
+      await prefs.setInt('userROLE', user['role']);
+
+      UserSessionEvent.id = user['id'];
+      UserSessionEvent.email = user['email'];
+      UserSessionEvent.name = user['name'];
+      UserSessionEvent.role = user['role'];
 
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(

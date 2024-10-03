@@ -1,8 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:attendance_nmscst/src/authentication/auth/auth_index.dart';
+import 'package:attendance_nmscst/src/pages/index/components/sidebar/sidebar.dart';
+import 'package:attendance_nmscst/src/pages/index/modules/index_body.dart';
+import 'package:attendance_nmscst/src/pages/index/modules/index_header.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class IndexPage extends StatefulWidget {
   const IndexPage({super.key});
@@ -15,19 +16,28 @@ class _IndexPageState extends State<IndexPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: TextButton(
-          onPressed: () async {
-            final prefs = await SharedPreferences.getInstance();
-            prefs.remove('userID');
-
-            Navigator.of(context).popUntil((route) => route.isFirst);
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => const AuthIndex()),
-            );
-          },
-          child: const Text("REMOVE SESSION ID"),
-        ),
+      body: Row(
+        children: [
+          const IndexSideBar(),
+          Expanded(
+            child: Scaffold(
+              body: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SingleChildScrollView(
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        indexHeader(),
+                        indexBody(context),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
