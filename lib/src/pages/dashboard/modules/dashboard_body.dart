@@ -1,7 +1,7 @@
 import 'package:attendance_nmscst/src/pages/index/components/cards.dart';
 import 'package:flutter/material.dart';
 
-Widget indexBody(context) {
+Widget dashboardBody(context) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Wrap(

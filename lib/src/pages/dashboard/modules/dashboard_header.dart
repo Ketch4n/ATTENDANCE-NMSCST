@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget indexHeader() {
+Widget dashboardHeader() {
   return Padding(
     padding: const EdgeInsets.all(10.0),
     child: ClipRRect(

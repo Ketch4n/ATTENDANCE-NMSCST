@@ -43,9 +43,9 @@ class _IndexSideBarState extends State<IndexSideBar> {
             ListTile(
               leading: Text(
                 userRoleValue(value.roleValue!),
-                style: TextStyle(fontSize: 20),
+                style: const TextStyle(fontSize: 20),
               ),
-              trailing: Icon(
+              trailing: const Icon(
                 Icons.circle,
                 color: Colors.green,
               ),

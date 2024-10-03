@@ -1,5 +1,6 @@
 import 'package:attendance_nmscst/src/authentication/auth/auth_index.dart';
 import 'package:attendance_nmscst/src/data/firebase/initialize.dart';
+import 'package:attendance_nmscst/src/data/provider/indexed_stack_pages.dart';
 import 'package:attendance_nmscst/src/data/provider/user_session.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -13,6 +14,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => UserSessionEvent()),
+        ChangeNotifierProvider(create: (_) => IndexedStackPagesEvent())
       ],
       child: const MainApp(),
     ),
