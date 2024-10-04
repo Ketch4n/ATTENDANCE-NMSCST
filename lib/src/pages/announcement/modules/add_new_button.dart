@@ -1,7 +1,9 @@
 import 'package:attendance_nmscst/src/components/material_button.dart';
+import 'package:attendance_nmscst/src/components/show_dialog.dart';
+import 'package:attendance_nmscst/src/pages/announcement/announcement_add.dart';
 import 'package:flutter/material.dart';
 
-Widget addNewButton() {
+Widget addNewButton(context, reload) {
   return Column(
     mainAxisSize: MainAxisSize.min,
     children: [
@@ -10,7 +12,14 @@ Widget addNewButton() {
         child: CustomMaterialButton(
           child: "Add New",
           icon: Icons.add_box,
-          function: () {},
+          function: () {
+            showCustomDialog(
+              context,
+              AnnouncementAdd(
+                reload: reload,
+              ),
+            );
+          },
         ),
       ),
       const SizedBox(height: 20),

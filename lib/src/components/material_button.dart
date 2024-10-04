@@ -24,7 +24,9 @@ class _CustomMaterialButtonState extends State<CustomMaterialButton> {
       height: 60,
       minWidth: 150,
       color: UtilsColorPallete.primary,
-      onPressed: () {},
+      onPressed: () {
+        widget.function();
+      },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         mainAxisSize: MainAxisSize.min,

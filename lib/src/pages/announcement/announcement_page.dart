@@ -4,6 +4,7 @@ import 'package:attendance_nmscst/src/pages/announcement/functions/delete.dart';
 import 'package:attendance_nmscst/src/pages/announcement/functions/get.dart';
 import 'package:attendance_nmscst/src/pages/announcement/model/announcement_model.dart';
 import 'package:attendance_nmscst/src/pages/announcement/modules/add_new_button.dart';
+import 'package:attendance_nmscst/src/pages/index/components/index_pages_header.dart';
 import 'package:attendance_nmscst/src/utils/styles/color_pallete.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +23,17 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
     await getAnnouncement(_announcementStream);
   }
 
+  void _removeAnnouncement(id) async {
+    await confirmationDialog(
+      context,
+      "Confirm Delete ?",
+      "Announcement Record",
+      () async {
+        await deleteAnnouncement(context, id, _fetchAnnouncements);
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -36,80 +48,78 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: UtilsColorPallete.grey,
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            addNewButton(),
-            Expanded(
-              child: StreamBuilder<List<AnnouncementModel>>(
-                stream: _announcementStream.stream,
-                builder: (context, snapshot) {
-                  List<AnnouncementModel> announcements = snapshot.data ?? [];
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (snapshot.hasError) {
-                    return Center(
-                      child: Text('Error: ${snapshot.error}'),
-                    );
-                  } else if (snapshot.hasData && snapshot.data!.isEmpty) {
-                    return const Center(
-                        child: Text('No announcements available.'));
-                  } else {
-                    return ListView.builder(
-                      itemCount: announcements.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Card(
-                          child: ListTile(
-                            leading: Container(
-                              height: 50,
-                              width: 50,
-                              decoration: const BoxDecoration(
-                                  shape: BoxShape.circle, color: Colors.blue),
-                              child: const Icon(
-                                Icons.mail,
-                                color: Colors.white,
-                              ),
-                            ),
-                            title: Text(announcements[index].subject),
-                            subtitle: Text(
-                              announcements[index]
-                                  .body
-                                  .replaceAll('<br>', '\n'),
-                            ),
-                            trailing: IconButton(
-                              icon: const Icon(Icons.delete),
-                              onPressed: () async {
-                                confirmationDialog(
-                                  context,
-                                  "Confirm Delete ?",
-                                  "Announcement Record",
-                                  () async {
-                                    bool success = await deleteAnnouncement(
-                                        context, announcements[index].id);
-                                    if (success) {
-                                      _fetchAnnouncements();
-                                    }
-                                  },
-                                );
-                              },
-                            ),
-                          ),
-                        );
+    return Column(
+      children: [
+        indexPagesHeader("Announcement"),
+        Expanded(
+          child: Scaffold(
+            backgroundColor: UtilsColorPallete.grey,
+            body: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  addNewButton(context, _fetchAnnouncements),
+                  Expanded(
+                    child: StreamBuilder<List<AnnouncementModel>>(
+                      stream: _announcementStream.stream,
+                      builder: (context, snapshot) {
+                        List<AnnouncementModel> announcements =
+                            snapshot.data ?? [];
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else if (snapshot.hasError) {
+                          return Center(
+                            child: Text('Error: ${snapshot.error}'),
+                          );
+                        } else if (snapshot.hasData && snapshot.data!.isEmpty) {
+                          return const Center(
+                              child: Text('No announcements available.'));
+                        } else {
+                          return ListView.builder(
+                            itemCount: announcements.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Card(
+                                child: ListTile(
+                                  leading: Container(
+                                    height: 50,
+                                    width: 50,
+                                    decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.blue),
+                                    child: const Icon(
+                                      Icons.mail,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  title: Text(announcements[index].subject),
+                                  subtitle: Text(
+                                    announcements[index]
+                                        .body
+                                        .replaceAll('<br>', '\n'),
+                                  ),
+                                  trailing: IconButton(
+                                    icon: const Icon(Icons.delete),
+                                    onPressed: () => _removeAnnouncement(
+                                        announcements[index].id),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        }
                       },
-                    );
-                  }
-                },
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }

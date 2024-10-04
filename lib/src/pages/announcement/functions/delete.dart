@@ -1,9 +1,12 @@
 import 'dart:convert';
+import 'package:attendance_nmscst/src/components/circular_loading.dart';
 import 'package:attendance_nmscst/src/components/snackbar.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:attendance_nmscst/src/data/server/url.dart';
 
-Future deleteAnnouncement(context, id) async {
+Future<void> deleteAnnouncement(context, id, reload) async {
+  circularLoading(context);
   try {
     final response = await http.delete(
       Uri.parse("${Servername.host}announcement/$id"),
@@ -16,15 +19,16 @@ Future deleteAnnouncement(context, id) async {
 
       if (quack) {
         customSnackBar(context, 0, message);
-        return quack;
       } else {
         customSnackBar(context, 1, message);
-        return false;
       }
     } else {
       print("Error: ${response.statusCode} ${response.reasonPhrase}");
     }
   } catch (e) {
     print('Error deleting announcement: $e');
+  } finally {
+    Navigator.of(context).pop();
+    reload();
   }
 }

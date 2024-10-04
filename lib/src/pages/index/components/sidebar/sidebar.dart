@@ -12,7 +12,11 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class IndexSideBar extends StatefulWidget {
-  const IndexSideBar({super.key});
+  const IndexSideBar({
+    super.key,
+    required this.function,
+  });
+  final Function(int) function;
 
   @override
   State<IndexSideBar> createState() => _IndexSideBarState();
@@ -57,7 +61,9 @@ class _IndexSideBarState extends State<IndexSideBar> {
             ListTile(
               leading: const Icon(Icons.home_sharp),
               title: const Text('Dashboard'),
-              onTap: () {},
+              onTap: () {
+                widget.function(0);
+              },
             ),
             ListTile(
               leading: const Icon(Icons.person),
@@ -88,22 +94,24 @@ class _IndexSideBarState extends State<IndexSideBar> {
               thickness: 1,
             ),
             ListTile(
-              leading: const Icon(Icons.school),
+              leading: const Icon(Icons.mail),
               title: const Text('Announcement'),
-              onTap: () {},
+              onTap: () {
+                widget.function(1);
+              },
             ),
             ListTile(
-              leading: const Icon(Icons.school),
+              leading: const Icon(Icons.location_off_sharp),
               title: const Text('Outside Range'),
               onTap: () {},
             ),
             ListTile(
-              leading: const Icon(Icons.school),
+              leading: const Icon(Icons.person_off_outlined),
               title: const Text('Absent'),
               onTap: () {},
             ),
             ListTile(
-              leading: const Icon(Icons.school),
+              leading: const Icon(Icons.timelapse_sharp),
               title: const Text('late'),
               onTap: () {},
             ),
@@ -112,7 +120,7 @@ class _IndexSideBarState extends State<IndexSideBar> {
               thickness: 1,
             ),
             ListTile(
-              leading: const Icon(Icons.school),
+              leading: const Icon(Icons.archive),
               title: const Text('Archived'),
               onTap: () {},
             ),

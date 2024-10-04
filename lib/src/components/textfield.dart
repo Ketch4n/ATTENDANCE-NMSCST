@@ -11,6 +11,7 @@ class CustomTextField extends StatefulWidget {
     this.suffix,
     required this.readOnly,
     this.index,
+    required this.fillcolor,
   });
   final String? label;
   final String? hint;
@@ -20,6 +21,7 @@ class CustomTextField extends StatefulWidget {
   final Widget? suffix;
   final bool readOnly;
   final int? index;
+  final Color fillcolor;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -53,7 +55,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           hintText: widget.hint,
           hintStyle: const TextStyle(fontSize: 15),
           labelStyle: const TextStyle(fontWeight: FontWeight.bold),
-          fillColor: Colors.white,
+          fillColor: widget.fillcolor,
           filled: true,
           suffixIcon: widget.suffix,
         ),
