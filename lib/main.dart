@@ -4,12 +4,10 @@ import 'package:attendance_nmscst/src/data/provider/indexed_stack_pages.dart';
 import 'package:attendance_nmscst/src/data/provider/textfield_body.dart';
 import 'package:attendance_nmscst/src/data/provider/user_session.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: ".env");
   await initializeFirebase();
   runApp(
     MultiProvider(

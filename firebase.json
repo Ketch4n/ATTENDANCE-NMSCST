@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "attendance-nmscst-2024",
     "public": "build/web",
     "ignore": [
       "firebase.json",

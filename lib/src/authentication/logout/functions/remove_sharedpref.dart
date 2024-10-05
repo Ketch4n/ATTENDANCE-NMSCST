@@ -10,11 +10,13 @@ void removeSharedPref(context) async {
   prefs.remove('userEMAIL');
   prefs.remove('userROLE');
 
-  InstanceTextEditing.clear();
-
-  Navigator.of(context).pushReplacement(
+  Navigator.of(context)
+      .pushReplacement(
     MaterialPageRoute(
       builder: (context) => const AuthIndex(),
     ),
-  );
+  )
+      .whenComplete(() {
+    InstanceTextEditing.clear();
+  });
 }
