@@ -24,9 +24,9 @@ Future<bool?> confirmationDialog(
         ],
       );
     },
-  ).then((value) {
+  ).then((value) async {
     if (value == true) {
-      callback();
+      await callback();
     }
     return value;
   });

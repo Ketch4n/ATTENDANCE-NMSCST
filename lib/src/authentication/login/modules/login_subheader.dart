@@ -4,6 +4,6 @@ import 'package:flutter/material.dart';
 Widget loginSubHeader() {
   return Padding(
     padding: const EdgeInsets.all(8.0),
-    child: Text("Administrator", style: UtilsTextStyle.h1),
+    child: Text("OJT COORDINATOR / INSTRUCTOR", style: UtilsTextStyle.h1),
   );
 }

@@ -13,6 +13,7 @@ Future<void> postAnnouncement(
   if (subject.isEmpty || body.isEmpty) {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     customSnackBar(context, 1, "Subject and Body cannot be empty !");
+    Navigator.of(context).pop();
   } else {
     circularLoading(context);
 

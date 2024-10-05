@@ -1,5 +1,5 @@
 import 'package:attendance_nmscst/src/authentication/login/components/text_button.dart';
-import 'package:attendance_nmscst/src/authentication/login/functions/submit.dart';
+import 'package:attendance_nmscst/src/authentication/login/functions/login.dart';
 import 'package:attendance_nmscst/src/data/constant/constant_text_controller.dart';
 import 'package:attendance_nmscst/src/utils/styles/text_field.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +54,7 @@ class _LoginBodyState extends State<LoginBody> {
               ),
             ),
             const SizedBox(height: 20),
-            CustomTextButton(function: () => onSubmit(context), child: "LOGIN")
+            CustomTextButton(function: () => login(context), child: "LOGIN")
           ],
         ),
       ),

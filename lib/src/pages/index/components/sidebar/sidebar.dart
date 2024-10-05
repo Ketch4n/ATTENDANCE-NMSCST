@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:attendance_nmscst/src/authentication/auth/auth_index.dart';
-import 'package:attendance_nmscst/src/components/confirmation_dialog.dart';
+import 'package:attendance_nmscst/src/authentication/logout/functions/logout.dart';
 import 'package:attendance_nmscst/src/data/index/user_role_value.dart';
 import 'package:attendance_nmscst/src/data/provider/user_session.dart';
 import 'package:attendance_nmscst/src/pages/index/components/sidebar/modules/sidebar_header.dart';
@@ -9,7 +8,6 @@ import 'package:attendance_nmscst/src/pages/index/components/sidebar/modules/sid
 import 'package:attendance_nmscst/src/utils/styles/color_pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class IndexSideBar extends StatefulWidget {
   const IndexSideBar({
@@ -127,22 +125,7 @@ class _IndexSideBarState extends State<IndexSideBar> {
             ListTile(
               title: const Text('Log-out'),
               leading: const Icon(Icons.exit_to_app),
-              onTap: () async {
-                confirmationDialog(context, "Confirm Logout ?", "", () async {
-                  final prefs = await SharedPreferences.getInstance();
-                  prefs.remove('userID');
-                  prefs.remove('userNAME');
-                  prefs.remove('userEMAIL');
-                  prefs.remove('userROLE');
-
-                  Navigator.of(context).popUntil((route) => route.isFirst);
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const AuthIndex(),
-                    ),
-                  );
-                });
-              },
+              onTap: () => logout(context),
             ),
           ],
         ),

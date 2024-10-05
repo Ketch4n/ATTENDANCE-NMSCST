@@ -26,13 +26,15 @@ class _AuthIndexState extends State<AuthIndex> {
     final uemail = prefs.getString('userEMAIL');
     final urole = prefs.getInt('userROLE');
 
-    setState(() {
-      UserSessionEvent.quack = userId == null;
-      UserSessionEvent.id = userId!;
-      UserSessionEvent.email = uemail!;
-      UserSessionEvent.name = uname!;
-      UserSessionEvent.role = urole!;
-    });
+    if (userId != null) {
+      setState(() {
+        UserSessionEvent.quack = false;
+        UserSessionEvent.id = userId;
+        UserSessionEvent.email = uemail ?? "";
+        UserSessionEvent.name = uname ?? "";
+        UserSessionEvent.role = urole ?? 0;
+      });
+    }
   }
 
   @override
