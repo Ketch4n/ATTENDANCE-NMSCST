@@ -14,25 +14,22 @@ Future<void> getAnnouncement(
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonResponse = json.decode(response.body);
 
-      // Ensure 'data' key exists in jsonResponse before accessing it
       if (jsonResponse.containsKey('data')) {
         List<dynamic> data = jsonResponse['data'];
         List<AnnouncementModel> announcements =
             data.map((json) => AnnouncementModel.fromJson(json)).toList();
 
-        // Add the list of announcements to the stream
         stream.add(announcements);
       } else {
-        print('No data found in response.');
-        stream.add([]); // Send an empty list if no data found
+        // print('No data found in response.');
+        stream.add([]);
       }
     } else {
-      print('Failed to load data. HTTP status code: ${response.statusCode}');
-      stream.add([]); // Optionally add an empty list on failure
+      // print('Failed to load data. HTTP status code: ${response.statusCode}');
+      stream.add([]);
     }
   } catch (e) {
-    print('Error occurred: $e');
-    stream.add(
-        []); // Optionally, add an empty list to the stream to indicate failure
+    // print('Error occurred: $e');
+    stream.add([]);
   }
 }

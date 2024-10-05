@@ -56,7 +56,7 @@ Future<void> login(context) async {
         customSnackBar(context, 1, message);
       }
     } catch (e) {
-      print(e);
+      // print(e);
     } finally {
       Navigator.of(context).pop();
     }

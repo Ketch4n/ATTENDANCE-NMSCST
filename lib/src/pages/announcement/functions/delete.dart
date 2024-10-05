@@ -23,10 +23,10 @@ Future<void> deleteAnnouncement(context, id, reload) async {
         customSnackBar(context, 1, message);
       }
     } else {
-      print("Error: ${response.statusCode} ${response.reasonPhrase}");
+      // print("Error: ${response.statusCode} ${response.reasonPhrase}");
     }
   } catch (e) {
-    print('Error deleting announcement: $e');
+    // print('Error deleting announcement: $e');
   } finally {
     Navigator.of(context).pop();
     reload();

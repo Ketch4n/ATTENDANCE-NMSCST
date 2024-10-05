@@ -36,10 +36,10 @@ Future<void> postAnnouncement(
           customSnackBar(context, 1, message);
         }
       } else {
-        print("Error: ${response.statusCode} ${response.reasonPhrase}");
+        // print("Error: ${response.statusCode} ${response.reasonPhrase}");
       }
     } catch (e) {
-      print("An error occurred while fetching announcement data: $e");
+      // print("An error occurred while fetching announcement data: $e");
     } finally {
       Navigator.of(context).pop();
       Navigator.of(context).pop();
