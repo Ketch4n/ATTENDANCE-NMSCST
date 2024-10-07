@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:attendance_nmscst/src/data/server/url.dart';
 import 'package:attendance_nmscst/src/pages/establishment/model/establishment_model.dart';
 import 'package:http/http.dart' as http;

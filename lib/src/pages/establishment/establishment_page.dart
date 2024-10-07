@@ -46,14 +46,13 @@ class _EstablishmentPageState extends State<EstablishmentPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  establishmentHeader(),
-                  const SizedBox(height: 20),
                   Expanded(
                     child: StreamBuilder<List<EstablishmentModel>>(
                       stream: _establishmentStream.stream,
                       builder: (context, snapshot) {
                         List<EstablishmentModel> establishment =
                             snapshot.data ?? [];
+
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
                           return const Center(
@@ -67,40 +66,47 @@ class _EstablishmentPageState extends State<EstablishmentPage> {
                           return const Center(
                               child: Text('No establishment available.'));
                         } else {
-                          return SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: DataTable(
-                              columns: [
-                                dataColumn("Establishment Name"),
-                                dataColumn("Location"),
-                                dataColumn("Arrival AM"),
-                                dataColumn("Departure AM"),
-                                dataColumn("Arrival PM"),
-                                dataColumn("Departure PM"),
-                                dataColumn("Hours Required"),
-                                dataColumn("Radius"),
-                                dataColumn("Options"),
-                              ],
-                              rows: establishment
-                                  .map(
-                                    (estab) => DataRow(
-                                      cells: [
-                                        dataRowCell(estab.establishmentName,
-                                            logo: true),
-                                        dataRowCell(estab.location),
-                                        dataRowCell("IN AM"),
-                                        dataRowCell("OUT AM"),
-                                        dataRowCell("IN PM"),
-                                        dataRowCell("OUT PM"),
-                                        dataRowCell(estab.hoursRequired),
-                                        dataRowCell("${estab.radius} meter/s"),
-                                        dataRowCellWidget(context, estab.id,
-                                            _fetchEstablishment),
-                                      ],
-                                    ),
-                                  )
-                                  .toList(),
-                            ),
+                          return Column(
+                            children: [
+                              establishmentHeader(establishment),
+                              const SizedBox(height: 20),
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: DataTable(
+                                  columns: [
+                                    dataColumn("Establishment Name"),
+                                    dataColumn("Location"),
+                                    dataColumn("Arrival AM"),
+                                    dataColumn("Departure AM"),
+                                    dataColumn("Arrival PM"),
+                                    dataColumn("Departure PM"),
+                                    dataColumn("Hours Required"),
+                                    dataColumn("Radius"),
+                                    dataColumn("Options"),
+                                  ],
+                                  rows: establishment
+                                      .map(
+                                        (estab) => DataRow(
+                                          cells: [
+                                            dataRowCell(estab.establishmentName,
+                                                logo: true),
+                                            dataRowCell(estab.location),
+                                            dataRowCell("IN AM"),
+                                            dataRowCell("OUT AM"),
+                                            dataRowCell("IN PM"),
+                                            dataRowCell("OUT PM"),
+                                            dataRowCell(estab.hoursRequired),
+                                            dataRowCell(
+                                                "${estab.radius} meter/s"),
+                                            dataRowCellWidget(context, estab.id,
+                                                _fetchEstablishment),
+                                          ],
+                                        ),
+                                      )
+                                      .toList(),
+                                ),
+                              ),
+                            ],
                           );
                         }
                       },

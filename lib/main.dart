@@ -1,6 +1,5 @@
 import 'package:attendance_nmscst/src/authentication/auth/auth_index.dart';
 import 'package:attendance_nmscst/src/data/firebase/initialize.dart';
-import 'package:attendance_nmscst/src/data/provider/establishment_list.dart';
 import 'package:attendance_nmscst/src/data/provider/indexed_stack_pages.dart';
 import 'package:attendance_nmscst/src/data/provider/textfield_body.dart';
 import 'package:attendance_nmscst/src/data/provider/user_session.dart';
@@ -17,7 +16,6 @@ void main() async {
         ChangeNotifierProvider(create: (_) => UserSessionEvent()),
         ChangeNotifierProvider(create: (_) => IndexedStackPagesEvent()),
         ChangeNotifierProvider(create: (_) => TextfieldBody()),
-        ChangeNotifierProvider(create: (_) => EstablishmentList())
       ],
       child: const MainApp(),
     ),

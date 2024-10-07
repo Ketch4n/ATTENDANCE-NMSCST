@@ -3,7 +3,7 @@ import 'package:attendance_nmscst/src/components/material_button.dart';
 import 'package:attendance_nmscst/src/pages/establishment/functions/export_pdf.dart';
 import 'package:flutter/material.dart';
 
-Widget establishmentHeader() {
+Widget establishmentHeader(estab) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
@@ -17,7 +17,7 @@ Widget establishmentHeader() {
       CustomMaterialButton(
         child: "Report",
         icon: Icons.picture_as_pdf,
-        function: () => exportPDF,
+        function: () => exportPDF(estab),
       ),
     ],
   );

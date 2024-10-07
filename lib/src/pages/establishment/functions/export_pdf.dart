@@ -1,53 +1,38 @@
-import 'package:attendance_nmscst/src/data/provider/establishment_list.dart';
-import 'package:flutter/material.dart';
+import 'package:attendance_nmscst/src/pages/establishment/model/establishment_model.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
-import 'package:provider/provider.dart';
 
-Future<void> exportPDF(BuildContext context) async {
-  final establishmentList =
-      Provider.of<EstablishmentList>(context, listen: false);
+Future<void> exportPDF(List<EstablishmentModel>? estab) async {
+  if (estab == null) {
+    print('No establishment data available to export.');
+    return; // Exit early if there's no data
+  }
+
   final pdf = pw.Document();
 
   pdf.addPage(
     pw.Page(
       build: (pw.Context context) {
         return pw.Column(
-          crossAxisAlignment: pw.CrossAxisAlignment.start,
           children: [
             pw.Text('Establishment Data',
                 style:
                     pw.TextStyle(fontSize: 24, fontWeight: pw.FontWeight.bold)),
             pw.SizedBox(height: 20),
-            pw.Table(
-              border: pw.TableBorder.all(),
-              children: [
-                // Headers
-                pw.TableRow(
-                  children: [
-                    pw.Text('Establishment Name',
-                        style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-                    pw.Text('Location',
-                        style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-                    pw.Text('Hours Required',
-                        style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-                    pw.Text('Radius',
-                        style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-                  ],
-                ),
-                // Data Rows
-                ...establishmentList.establishments.map((estabModel) {
-                  return pw.TableRow(
-                    children: [
-                      pw.Text(estabModel.establishmentName),
-                      pw.Text(estabModel.location),
-                      pw.Text(estabModel.hoursRequired.toString()),
-                      pw.Text(estabModel.radius.toString()),
-                    ],
-                  );
-                }),
+            pw.TableHelper.fromTextArray(
+              headers: [
+                'Establishment Name',
+                'Location',
+                'Hours Required',
               ],
+              data: estab.map((estabModel) {
+                return [
+                  estabModel.establishmentName,
+                  estabModel.location,
+                  estabModel.hoursRequired,
+                ];
+              }).toList(),
             ),
           ],
         );
@@ -55,7 +40,11 @@ Future<void> exportPDF(BuildContext context) async {
     ),
   );
 
-  await Printing.layoutPdf(
-    onLayout: (PdfPageFormat format) async => pdf.save(),
-  );
+  try {
+    await Printing.layoutPdf(
+      onLayout: (PdfPageFormat format) async => pdf.save(),
+    );
+  } catch (e) {
+    print('Error while generating PDF: $e');
+  }
 }
