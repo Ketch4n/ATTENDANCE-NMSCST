@@ -13,6 +13,7 @@ Widget dashboardBody(context) {
           onTap: () {},
           child: const IndexCard(
             count: "0",
+            icon: Icons.timelapse_sharp,
             child: 'List of Late',
           ),
         ),
@@ -20,6 +21,7 @@ Widget dashboardBody(context) {
           onTap: () {},
           child: const IndexCard(
             count: "0",
+            icon: Icons.location_off_sharp,
             child: 'Outside Range',
           ),
         ),
@@ -27,6 +29,7 @@ Widget dashboardBody(context) {
           onTap: () {},
           child: const IndexCard(
             count: "0",
+            icon: Icons.person_off_outlined,
             child: 'Absent',
           ),
         ),
@@ -34,6 +37,7 @@ Widget dashboardBody(context) {
           onTap: () {},
           child: const IndexCard(
             count: "0",
+            icon: Icons.location_city,
             child: 'All Establishment',
           ),
         ),
@@ -41,6 +45,7 @@ Widget dashboardBody(context) {
           onTap: () {},
           child: const IndexCard(
             count: "0",
+            icon: Icons.school,
             child: 'All Students',
           ),
         ),
@@ -48,6 +53,7 @@ Widget dashboardBody(context) {
           onTap: () {},
           child: const IndexCard(
             count: "0",
+            icon: Icons.mail,
             child: 'Announcement',
           ),
         ),

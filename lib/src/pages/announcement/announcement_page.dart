@@ -1,11 +1,9 @@
 import 'dart:async';
-import 'package:attendance_nmscst/src/components/confirmation_dialog.dart';
 import 'package:attendance_nmscst/src/pages/announcement/functions/delete.dart';
 import 'package:attendance_nmscst/src/pages/announcement/functions/get.dart';
 import 'package:attendance_nmscst/src/pages/announcement/model/announcement_model.dart';
 import 'package:attendance_nmscst/src/pages/announcement/modules/add_new_button.dart';
 import 'package:attendance_nmscst/src/pages/index/components/index_pages_header.dart';
-import 'package:attendance_nmscst/src/utils/styles/color_pallete.dart';
 import 'package:flutter/material.dart';
 
 class AnnouncementPage extends StatefulWidget {
@@ -21,17 +19,6 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
 
   void _fetchAnnouncements() async {
     await getAnnouncement(_announcementStream);
-  }
-
-  void _removeAnnouncement(id) async {
-    await confirmationDialog(
-      context,
-      "Confirm Delete ?",
-      "Announcement Record",
-      () async {
-        await deleteAnnouncement(context, id, _fetchAnnouncements);
-      },
-    );
   }
 
   @override
@@ -53,7 +40,6 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
         indexPagesHeader("Announcement"),
         Expanded(
           child: Scaffold(
-            backgroundColor: UtilsColorPallete.grey,
             body: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Column(
@@ -103,8 +89,11 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
                                   ),
                                   trailing: IconButton(
                                     icon: const Icon(Icons.delete),
-                                    onPressed: () => _removeAnnouncement(
-                                        announcements[index].id),
+                                    onPressed: () => removeAnnouncement(
+                                      context,
+                                      announcements[index].id,
+                                      _fetchAnnouncements,
+                                    ),
                                   ),
                                 ),
                               );

@@ -7,10 +7,13 @@ class IndexCard extends StatelessWidget {
     super.key,
     required this.child,
     required this.count,
+    required this.icon,
   });
   final String child;
 
   final String count;
+
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +27,8 @@ class IndexCard extends StatelessWidget {
             color: UtilsColorPallete.blue,
           ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -50,6 +55,14 @@ class IndexCard extends StatelessWidget {
               "See more ->",
               style: TextStyle(color: Colors.white),
             ),
+          ),
+        ),
+        Positioned(
+          top: 0,
+          right: 0,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(icon),
           ),
         ),
       ],

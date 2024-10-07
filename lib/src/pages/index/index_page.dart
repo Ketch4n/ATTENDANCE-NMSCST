@@ -3,6 +3,7 @@
 import 'package:attendance_nmscst/src/data/provider/indexed_stack_pages.dart';
 import 'package:attendance_nmscst/src/pages/announcement/announcement_page.dart';
 import 'package:attendance_nmscst/src/pages/dashboard/dashboard_page.dart';
+import 'package:attendance_nmscst/src/pages/establishment/establishment_page.dart';
 import 'package:attendance_nmscst/src/pages/index/components/sidebar/sidebar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -36,6 +37,7 @@ class _IndexPageState extends State<IndexPage> {
                 children: const [
                   DashboardPage(),
                   AnnouncementPage(),
+                  EstablishmentPage(),
                 ],
               ),
             )),

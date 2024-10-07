@@ -1,8 +1,10 @@
 import 'package:attendance_nmscst/src/authentication/auth/auth_index.dart';
 import 'package:attendance_nmscst/src/data/firebase/initialize.dart';
+import 'package:attendance_nmscst/src/data/provider/establishment_list.dart';
 import 'package:attendance_nmscst/src/data/provider/indexed_stack_pages.dart';
 import 'package:attendance_nmscst/src/data/provider/textfield_body.dart';
 import 'package:attendance_nmscst/src/data/provider/user_session.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +16,8 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => UserSessionEvent()),
         ChangeNotifierProvider(create: (_) => IndexedStackPagesEvent()),
-        ChangeNotifierProvider(create: (_) => TextfieldBody())
+        ChangeNotifierProvider(create: (_) => TextfieldBody()),
+        ChangeNotifierProvider(create: (_) => EstablishmentList())
       ],
       child: const MainApp(),
     ),
@@ -26,9 +29,18 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AuthIndex(),
+      scrollBehavior: MyCustomScrollBehavior(),
+      home: const AuthIndex(),
     );
   }
+}
+
+class MyCustomScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }

@@ -6,22 +6,22 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:attendance_nmscst/src/data/server/url.dart';
 
-void removeAnnouncement(context, id, reload) async {
+void removeEstablishment(context, id, reload) async {
   await confirmationDialog(
     context,
     "Confirm Delete ?",
-    "Announcement Record",
+    "Establishment Record",
     () async {
-      await deleteAnnouncement(context, id, reload);
+      await deleteEstablishment(context, id, reload);
     },
   );
 }
 
-Future<void> deleteAnnouncement(context, id, reload) async {
+Future<void> deleteEstablishment(context, id, reload) async {
   circularLoading(context);
   try {
     final response = await http.delete(
-      Uri.parse("${Servername.host}announcement/$id"),
+      Uri.parse("${Servername.host}establishment/$id"),
     );
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonResponse = json.decode(response.body);

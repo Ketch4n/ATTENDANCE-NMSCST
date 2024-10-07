@@ -27,6 +27,10 @@ dependencies:
   # STORAGE
   shared_preferences: ^2.3.2
 
+  # DOCUMENTS
+  printing: ^5.13.3
+  pdf: ^3.11.1
+
   # STYLING
   hexcolor: ^3.0.1
 

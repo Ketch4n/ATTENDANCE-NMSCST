@@ -80,7 +80,9 @@ class _IndexSideBarState extends State<IndexSideBar> {
             ListTile(
               leading: const Icon(Icons.location_city),
               title: const Text('Establishment'),
-              onTap: () {},
+              onTap: () {
+                widget.function(2);
+              },
             ),
             ListTile(
               leading: const Icon(Icons.school),
