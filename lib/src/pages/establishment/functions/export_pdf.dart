@@ -3,12 +3,7 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
-Future<void> exportPDF(List<EstablishmentModel>? estab) async {
-  if (estab == null) {
-    print('No establishment data available to export.');
-    return; // Exit early if there's no data
-  }
-
+Future<void> exportPDF(List<EstablishmentModel> estab) async {
   final pdf = pw.Document();
 
   pdf.addPage(

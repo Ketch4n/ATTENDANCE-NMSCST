@@ -1,7 +1,10 @@
 import 'dart:async';
+import 'package:attendance_nmscst/src/components/material_button.dart';
+import 'package:attendance_nmscst/src/components/show_dialog.dart';
+import 'package:attendance_nmscst/src/pages/establishment/establishment_add.dart';
+import 'package:attendance_nmscst/src/pages/establishment/functions/export_pdf.dart';
 import 'package:attendance_nmscst/src/pages/establishment/functions/get.dart';
 import 'package:attendance_nmscst/src/pages/establishment/model/establishment_model.dart';
-import 'package:attendance_nmscst/src/pages/establishment/modules/top_buttons.dart';
 import 'package:attendance_nmscst/src/pages/establishment/utils/data_column.dart';
 import 'package:attendance_nmscst/src/pages/establishment/utils/data_row_cell.dart';
 import 'package:attendance_nmscst/src/pages/index/components/index_pages_header.dart';
@@ -68,7 +71,27 @@ class _EstablishmentPageState extends State<EstablishmentPage> {
                         } else {
                           return Column(
                             children: [
-                              establishmentHeader(establishment),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  CustomMaterialButton(
+                                    child: "Add New",
+                                    icon: Icons.add,
+                                    function: () {
+                                      showCustomDialog(
+                                        context,
+                                        const EstablishmentAdd(),
+                                      );
+                                    },
+                                  ),
+                                  CustomMaterialButton(
+                                    child: "Report",
+                                    icon: Icons.picture_as_pdf,
+                                    function: () => exportPDF(establishment),
+                                  ),
+                                ],
+                              ),
                               const SizedBox(height: 20),
                               SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
