@@ -1,5 +1,6 @@
 import 'package:attendance_nmscst/src/pages/establishment/modules/button_footer.dart';
 import 'package:attendance_nmscst/src/pages/establishment/modules/title_header.dart';
+import 'package:attendance_nmscst/src/pages/map/google_map.dart';
 import 'package:attendance_nmscst/src/utils/styles/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -84,16 +85,16 @@ class _EstablishmentAddState extends State<EstablishmentAdd> {
                         iconSize: 50,
                         icon: const Icon(Icons.location_pin),
                         onPressed: () async {
-                          // final value = await Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) => MapScreen()),
-                          // );
-                          // if (value != null) {
-                          //   setState(() {
-                          //     _show = false;
-                          //   });
-                          // }
+                          final value = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const MapScreen()),
+                          );
+                          if (value != null) {
+                            setState(() {
+                              _show = false;
+                            });
+                          }
                         },
                       ),
                     ),

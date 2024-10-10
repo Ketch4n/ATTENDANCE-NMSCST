@@ -21,7 +21,8 @@ dependencies:
   firebase_database: ^11.1.4
 
   # NETWORK
-  http: ^1.2.2
+  # http: ^1.2.2
+  http: ^0.13.6
   web_socket_channel: ^3.0.1
 
   # STORAGE
@@ -33,6 +34,16 @@ dependencies:
 
   # STYLING
   hexcolor: ^3.0.1
+  lottie: ^2.7.0
+
+  # GOOGLE MAPS
+  google_maps_flutter: ^2.6.1
+  google_maps_webservice: ^0.0.20-nullsafety.5
+  flutter_google_places_hoc081098: ^1.0.0-nullsafety.1
+  google_api_headers: ^1.1.1
+  location: ^5.0.3
+  geolocator: ^9.0.2
+  geocoding: ^2.0.5
 
 dev_dependencies:
   flutter_test:
@@ -44,3 +55,4 @@ flutter:
   assets:
   - assets/
   - assets/img/
+  - assets/json/
