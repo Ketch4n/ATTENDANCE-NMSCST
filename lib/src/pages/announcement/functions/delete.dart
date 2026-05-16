@@ -1,10 +1,12 @@
-import 'dart:convert';
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:attendance_nmscst/src/components/circular_loading.dart';
 import 'package:attendance_nmscst/src/components/confirmation_dialog.dart';
 import 'package:attendance_nmscst/src/components/snackbar.dart';
+import 'package:attendance_nmscst/src/data/provider/demo_mode_provider.dart';
+import 'package:attendance_nmscst/src/data/services/api_service.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:attendance_nmscst/src/data/server/url.dart';
+import 'package:provider/provider.dart';
 
 void removeAnnouncement(context, id, reload) async {
   await confirmationDialog(
@@ -19,26 +21,26 @@ void removeAnnouncement(context, id, reload) async {
 
 Future<void> deleteAnnouncement(context, id, reload) async {
   circularLoading(context);
+
+  final isDemoMode =
+      Provider.of<DemoModeProvider>(context, listen: false).isDemoMode;
+
   try {
-    final response = await http.delete(
-      Uri.parse("${Servername.host}announcement/$id"),
+    final jsonResponse = await ApiService.delete(
+      'announcement/$id',
+      isDemoMode: isDemoMode,
     );
-    if (response.statusCode == 200) {
-      Map<String, dynamic> jsonResponse = json.decode(response.body);
 
-      final bool quack = jsonResponse['quack'];
-      final String message = jsonResponse['message'];
+    final bool quack = jsonResponse['quack'];
+    final String message = jsonResponse['message'];
 
-      if (quack) {
-        customSnackBar(context, 0, message);
-      } else {
-        customSnackBar(context, 1, message);
-      }
+    if (quack) {
+      customSnackBar(context, 0, message);
     } else {
-      // print("Error: ${response.statusCode} ${response.reasonPhrase}");
+      customSnackBar(context, 1, message);
     }
   } catch (e) {
-    // print('Error deleting announcement: $e');
+    customSnackBar(context, 1, "An error occurred: $e");
   } finally {
     Navigator.of(context).pop();
     reload();

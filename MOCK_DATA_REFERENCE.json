@@ -1,0 +1,74 @@
+{
+  "endpoints": {
+    "GET /establishment": {
+      "description": "Returns list of establishments",
+      "response": {
+        "quack": true,
+        "message": "Establishments retrieved successfully",
+        "data": [
+          {
+            "id": 1,
+            "establishment_name": "Main Campus",
+            "latitude": "14.5995",
+            "longitude": "120.9842",
+            "location": "Manila, Philippines",
+            "hours_required": "8",
+            "radius": "100",
+            "status": 1,
+            "created_at": "2024-01-15T08:00:00.000000Z",
+            "updated_at": "2024-01-15T08:00:00.000000Z"
+          }
+        ]
+      },
+      "total_records": 5
+    },
+    "GET /announcement": {
+      "description": "Returns list of announcements",
+      "response": {
+        "quack": true,
+        "message": "Announcements retrieved successfully",
+        "data": [
+          {
+            "id": 1,
+            "subject": "Welcome to the New Semester",
+            "body": "We are excited to welcome all students and faculty to the new academic semester.<br>Please review the updated guidelines and schedules.",
+            "created_at": "2024-03-01T08:00:00.000000Z",
+            "updated_at": "2024-03-01T08:00:00.000000Z"
+          }
+        ]
+      },
+      "total_records": 5
+    },
+    "POST /announcement": {
+      "description": "Creates a new announcement",
+      "request_body": {
+        "subject": "string",
+        "body": "string"
+      },
+      "response": {
+        "quack": true,
+        "message": "Operation completed successfully (Demo Mode)"
+      }
+    },
+    "DELETE /announcement/:id": {
+      "description": "Deletes an announcement by ID",
+      "response": {
+        "quack": true,
+        "message": "Operation completed successfully (Demo Mode)"
+      }
+    }
+  },
+  "notes": {
+    "demo_mode_behavior": [
+      "All requests have simulated network delays (500-800ms)",
+      "POST and DELETE operations return success responses but don't persist data",
+      "GET requests always return the same mock data",
+      "No actual database modifications occur in demo mode"
+    ],
+    "response_format": {
+      "quack": "boolean - indicates success/failure",
+      "message": "string - human-readable message",
+      "data": "array - contains the actual data (for GET requests)"
+    }
+  }
+}

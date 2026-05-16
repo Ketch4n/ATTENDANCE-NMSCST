@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'package:attendance_nmscst/src/data/provider/demo_mode_provider.dart';
 import 'package:attendance_nmscst/src/pages/announcement/functions/delete.dart';
 import 'package:attendance_nmscst/src/pages/announcement/functions/get.dart';
 import 'package:attendance_nmscst/src/pages/announcement/model/announcement_model.dart';
 import 'package:attendance_nmscst/src/pages/announcement/modules/add_new_button.dart';
 import 'package:attendance_nmscst/src/pages/index/components/index_pages_header.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AnnouncementPage extends StatefulWidget {
   const AnnouncementPage({super.key});
@@ -18,7 +20,9 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
       StreamController<List<AnnouncementModel>>();
 
   void _fetchAnnouncements() async {
-    await getAnnouncement(_announcementStream);
+    final isDemoMode =
+        Provider.of<DemoModeProvider>(context, listen: false).isDemoMode;
+    await getAnnouncement(_announcementStream, isDemoMode: isDemoMode);
   }
 
   @override

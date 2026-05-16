@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:attendance_nmscst/src/components/material_button.dart';
 import 'package:attendance_nmscst/src/components/show_dialog.dart';
+import 'package:attendance_nmscst/src/data/provider/demo_mode_provider.dart';
 import 'package:attendance_nmscst/src/pages/establishment/establishment_add.dart';
 import 'package:attendance_nmscst/src/pages/establishment/functions/export_pdf.dart';
 import 'package:attendance_nmscst/src/pages/establishment/functions/get.dart';
@@ -9,6 +10,7 @@ import 'package:attendance_nmscst/src/pages/establishment/utils/data_column.dart
 import 'package:attendance_nmscst/src/pages/establishment/utils/data_row_cell.dart';
 import 'package:attendance_nmscst/src/pages/index/components/index_pages_header.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class EstablishmentPage extends StatefulWidget {
   const EstablishmentPage({super.key});
@@ -22,7 +24,9 @@ class _EstablishmentPageState extends State<EstablishmentPage> {
       StreamController<List<EstablishmentModel>>();
 
   void _fetchEstablishment() async {
-    await getEstablishment(_establishmentStream);
+    final isDemoMode =
+        Provider.of<DemoModeProvider>(context, listen: false).isDemoMode;
+    await getEstablishment(_establishmentStream, isDemoMode: isDemoMode);
   }
 
   @override
@@ -88,7 +92,8 @@ class _EstablishmentPageState extends State<EstablishmentPage> {
                                   CustomMaterialButton(
                                     child: "Report",
                                     icon: Icons.picture_as_pdf,
-                                    function: () => exportPDF(establishment),
+                                    function: () =>
+                                        exportPDF(context, establishment),
                                   ),
                                 ],
                               ),
